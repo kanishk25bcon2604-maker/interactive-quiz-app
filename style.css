@@ -1,0 +1,508 @@
+/* ==========================================================================
+   Code With AI Quiz - Professional Blue, White & Gold Theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Royal Blue Color System */
+  --bg-navy-dark: #07111e;
+  --bg-navy-deep: #0c1a30;
+  --bg-navy-surface: #102444;
+  --blue-primary: #1e40af;
+  --blue-royal: #2563eb;
+  --blue-glow: rgba(37, 99, 235, 0.28);
+  --blue-light: #60a5fa;
+
+  /* Executive Gold Color System */
+  --gold-primary: #d4af37;
+  --gold-light: #fbe38e;
+  --gold-bright: #fbbf24;
+  --gold-deep: #b38728;
+  --gold-gradient: linear-gradient(135deg, #ffffff 0%, #fbe38e 45%, #d4af37 100%);
+  --gold-badge-grad: linear-gradient(135deg, #fce09b 0%, #d4af37 60%, #aa771c 100%);
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --gold-border: rgba(212, 175, 55, 0.38);
+
+  /* Crisp Whites & Neutrals */
+  --text-white: #ffffff;
+  --text-platinum: #f8fafc;
+  --text-muted: #94a3b8;
+  --surface-white: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.12);
+
+  /* Radius & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --shadow-card: 0 24px 50px -12px rgba(0, 0, 0, 0.65), 0 0 35px rgba(212, 175, 55, 0.12);
+  --shadow-button: 0 4px 14px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 10px 24px -4px rgba(0, 0, 0, 0.4), 0 0 18px rgba(212, 175, 55, 0.25);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset & Typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 2.5rem 1.25rem;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-platinum);
+  background-color: var(--bg-navy-dark);
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.12) 0%, transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(37, 99, 235, 0.22) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, rgba(16, 36, 68, 0.6) 0%, transparent 70%),
+    linear-gradient(145deg, #050d18 0%, #0c1a30 50%, #07111e 100%);
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ambient Background Lights */
+body::before {
+  content: '';
+  position: fixed;
+  top: -160px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -160px;
+  left: -120px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 64, 175, 0.28) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   Header (Title)
+   ========================================================================== */
+
+h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  text-align: center;
+  margin: 0 0 2rem 0;
+  letter-spacing: -0.025em;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(212, 175, 55, 0.25));
+  position: relative;
+  z-index: 1;
+  animation: fadeInDown 0.65s var(--ease-smooth) forwards;
+}
+
+/* Premium Gold Underline Accent */
+h1::after {
+  content: '';
+  display: block;
+  width: 76px;
+  height: 3px;
+  background: var(--gold-badge-grad);
+  margin: 0.85rem auto 0;
+  border-radius: 4px;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.7);
+}
+
+/* ==========================================================================
+   Main Quiz Card
+   ========================================================================== */
+
+#quiz {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  box-sizing: border-box;
+  background: linear-gradient(165deg, rgba(16, 36, 68, 0.88) 0%, rgba(9, 21, 40, 0.96) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-card),
+              inset 0 1px 1px rgba(255, 255, 255, 0.16),
+              inset 0 -1px 1px rgba(212, 175, 55, 0.15);
+  animation: cardFadeIn 0.7s var(--ease-smooth) forwards;
+}
+
+/* Glowing Top Accent on Card */
+#quiz::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, #fbe38e, #d4af37, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.8);
+}
+
+/* Question Header */
+#question {
+  color: var(--text-white);
+  font-size: clamp(1.2rem, 2.7vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.55;
+  margin: 0 0 1.75rem 0;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.01em;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+#question:empty {
+  display: none;
+}
+
+/* Options Container */
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  width: 100%;
+  counter-reset: option-index;
+}
+
+#options:empty {
+  display: none;
+}
+
+/* ==========================================================================
+   Option Buttons
+   ========================================================================== */
+
+#options button {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-platinum);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1.5px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.35rem;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.25s var(--ease-smooth);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-button);
+  overflow: hidden;
+}
+
+/* Option Letter Badge (A, B, C, D...) */
+#options button::before {
+  counter-increment: option-index;
+  content: counter(option-index, upper-alpha);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  margin-right: 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: all 0.25s var(--ease-smooth);
+  flex-shrink: 0;
+}
+
+/* Subtle Shimmer Overlay on Button */
+#options button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+/* Hover State */
+#options button:hover {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.42) 0%, rgba(212, 175, 55, 0.16) 100%);
+  border-color: var(--gold-primary);
+  color: var(--text-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+#options button:hover::before {
+  background: var(--gold-badge-grad);
+  border-color: var(--gold-bright);
+  color: #07111e;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+  transform: scale(1.05);
+}
+
+#options button:hover::after {
+  left: 100%;
+}
+
+/* Keyboard Accessibility Focus */
+#options button:focus-visible {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.45), 0 8px 20px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Active / Click Press */
+#options button:active {
+  transform: translateY(0px) scale(0.99);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   Quiz Completion & Result Banner
+   ========================================================================== */
+
+/* Enhanced styling when quiz completes (options empty) */
+#quiz:has(#options:empty) {
+  text-align: center;
+  padding: 3rem 2.5rem;
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: var(--shadow-card), 0 0 45px rgba(212, 175, 55, 0.22);
+}
+
+#quiz:has(#options:empty) #question {
+  text-align: center;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1.85rem, 4vw, 2.35rem);
+  font-weight: 800;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
+}
+
+#result:empty {
+  display: none;
+}
+
+#result:not(:empty) {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  box-sizing: border-box;
+  margin-top: 1.5rem;
+  padding: 1.4rem 2rem;
+  background: linear-gradient(145deg, rgba(16, 36, 68, 0.94) 0%, rgba(9, 21, 40, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: var(--radius-lg);
+  color: var(--text-white);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.28);
+  animation: resultSlideUp 0.6s var(--ease-smooth) forwards;
+}
+
+/* Gold Trophy Icon before Result */
+#result:not(:empty)::before {
+  content: '🏆';
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.4));
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes resultSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Desktop & Mobile)
+   ========================================================================== */
+
+/* Tablet & Mobile Screens */
+@media (max-width: 640px) {
+  body {
+    padding: 1.5rem 1rem;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h1::after {
+    width: 60px;
+    height: 2.5px;
+    margin-top: 0.65rem;
+  }
+
+  #quiz {
+    padding: 1.65rem 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  #quiz:has(#options:empty) {
+    padding: 2.25rem 1.5rem;
+  }
+
+  #question {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 1.35rem;
+    padding-bottom: 1rem;
+  }
+
+  #options {
+    gap: 0.75rem;
+  }
+
+  #options button {
+    padding: 0.95rem 1.1rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+
+  #options button::before {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    margin-right: 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  #result:not(:empty) {
+    margin-top: 1.25rem;
+    padding: 1.15rem 1.25rem;
+    font-size: 1.1rem;
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Small Handheld Screens */
+@media (max-width: 380px) {
+  body {
+    padding: 1rem 0.75rem;
+    padding-top: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  #quiz {
+    padding: 1.35rem 1rem;
+  }
+
+  #question {
+    font-size: 1.05rem;
+  }
+
+  #options button {
+    padding: 0.85rem 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  #options button::before {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    margin-right: 0.65rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Accessibility: Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
